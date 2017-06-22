@@ -1,1 +1,11 @@
 <h1>Weather app</h1>
+
+<%= form_for Weather.new, :url => create_weather_path_url(@weather)  do |f|%>
+<%= f.label :zipcode, 'Zipcode' %><br>
+<%= f.text_area :zipcode, class: "form-control", placeholder: 'Search here' %>
+<%= f.submit "Search", class: 'btn btn-primary btn-md center-block' %>
+
+<h2>Current Search</h2>
+<%= @current.zipcode%>
+
+<%end%>
