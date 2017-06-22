@@ -5,8 +5,12 @@ class WeatherController < ApplicationController
   def index
     @weather = Weather.new
     @recent = Weather.last
+    if @recent
     @second_recent = Weather.find_by_id(@recent.id-1)
+    end
+    if @second_recent
     @third_recent = Weather.find_by_id(@recent.id-2)
+    end
   end
 
   def create
