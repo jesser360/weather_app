@@ -1,3 +1,90 @@
-<h2>Current Search</h2>
-<%= @current.zipcode%>
-<%= @forecast_response%>
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>YardSpace</title>
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+<link href="https://fonts.googleapis.com/css?family=Amatic+SC" rel="stylesheet">
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+  <!-- Latest compiled and minified JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-confirmation/1.0.5/bootstrap-confirmation.js"></script>
+  </head>
+<%=link_to 'Back to Search', '/'%>
+<h4>Searched zipcode: <%= @current.zipcode%></h4>
+<h1 class="text-center"><%= @forecast_response%></h1>
+<div class="row text-center weather">
+  <div class="col-xs-2">
+    <%= @day0_date%><br/>
+    <%=image_tag('http://openweathermap.org/img/w/'+@day0_icon+'.png')%><br/>
+    <%= @day0_des%>
+    <p>Day:
+      <%= @day0_temp%>
+      F</p>
+    <p>Night:
+      <%= @night0_temp%>
+      F</p>
+  </div>
+  <div class="col-xs-2">
+    <%= @day1_date%><br/>
+    <%=image_tag('http://openweathermap.org/img/w/'+@day1_icon+'.png')%><br/>
+    <%= @day1_des%>
+    <p>Day:
+      <%= @day1_temp%>
+      F</p>
+    <p>Night:
+      <%= @night1_temp%>
+      F</p>
+  </div>
+  <div class="col-xs-2">
+    <%= @day2_date%><br/>
+    <%=image_tag('http://openweathermap.org/img/w/'+@day2_icon+'.png')%><br/>
+    <%= @day2_des%>
+    <p>Day:
+      <%= @day2_temp%>
+      F</p>
+    <p>Night:
+      <%= @night2_temp%>
+      F</p>
+  </div>
+  <div class="col-xs-2">
+    <%= @day3_date%><br/>
+    <%=image_tag('http://openweathermap.org/img/w/'+@day3_icon+'.png')%><br/>
+    <%= @day3_des%>
+    <p>Day:
+      <%= @day3_temp%>
+      F</p>
+    <p>Night:
+      <%= @night3_temp%>
+      F</p>
+  </div>
+  <div class="col-xs-2">
+    <%= @day4_date%><br/>
+    <%=image_tag('http://openweathermap.org/img/w/'+@day4_icon+'.png')%><br/>
+    <%= @day4_des%>
+    <p>Day:
+      <%= @day4_temp%>
+      F</p>
+    <p>Night:
+      <%= @night4_temp%>
+      F</p>
+  </div>
+  <div class="col-xs-2">
+    <%= @day5_date%><br/>
+    <%=image_tag('http://openweathermap.org/img/w/'+@day5_icon+'.png')%><br/>
+    <%= @day5_des%>
+    <p>Day:
+      <%= @day5_temp%>
+      F</p>
+    <p>Night:
+      <%= @night5_temp%>
+      F</p>
+  </div>
+</div>
+
+</body>
+</html>

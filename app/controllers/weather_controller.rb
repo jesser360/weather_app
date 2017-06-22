@@ -4,6 +4,9 @@ class WeatherController < ApplicationController
 
   def index
     @weather = Weather.new
+    @recent = Weather.last
+    @second_recent = Weather.find_by_id(@recent.id-1)
+    @third_recent = Weather.find_by_id(@recent.id-2)
   end
 
   def create
@@ -36,7 +39,8 @@ class WeatherController < ApplicationController
   def assign_values(weather_hash)
     puts "IN ASSIGN VALUES"
     require 'date'
-         @forecast_response = weather_hash.parsed_response['city']
+      if (weather_hash.parsed_response['city'])
+         @forecast_response = weather_hash.parsed_response['city']['name']
          @date0 = weather_hash.parsed_response['list'][0]['dt']
          @day0_date = Time.at(@date0).to_date.strftime("%m/%d")
          @day0 = weather_hash.parsed_response['list'][0]['temp']['day']
@@ -90,6 +94,11 @@ class WeatherController < ApplicationController
          @night5_temp = ((1.8*(@night5-273))+32).floor
          @day5_icon = weather_hash.parsed_response['list'][5]['weather'][0]['icon']
          @day5_des = weather_hash.parsed_response['list'][5]['weather'][0]['description']
+      else
+        redirect_to :back
+        flash[:error] = "Not a valid USA zip code"
+      end
+
    end
 
   def search_params

@@ -1,10 +1,19 @@
-<h1>Weather app</h1>
-
+<h1>Weather Search</h1>
+<h4>Search By Zipcode for Live Weather reports</h4>
+<br /><% flash.each do |name, msg| %>
+<div class="myAlert<% if name==" error" %> alert-danger <% elsif name==" success" %> alert-success <% else %> alert-info <% end %>">
+<%= msg %>
+</div>
+<% end %>
+<br><br>
 <%= form_for Weather.new, :url => create_weather_path_url(@weather)  do |f|%>
 <%= f.label :zipcode, 'Zipcode' %><br>
 <%= f.text_area :zipcode, class: "form-control", placeholder: 'Search here' %>
 <%= f.submit "Search", class: 'btn btn-primary btn-md center-block' %>
-
-
+<br><br>
+<h3>Recent Searches:</h3>
+<%=@recent.zipcode%><br>
+<%=@second_recent.zipcode%><br>
+<%=@third_recent.zipcode%><br>
 
 <%end%>
