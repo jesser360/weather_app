@@ -10,8 +10,15 @@
 <%= f.label :zipcode, 'Zipcode' %><br>
 <%= f.text_area :zipcode, class: "form-control", placeholder: 'Search here' %>
 <%= f.submit "Search", class: 'btn btn-primary btn-md center-block' %>
+<%end%>
 <br><br>
 <h3>Recent Searches:</h3>
-
-
-<%end%>
+  <%if @recent%>
+    <%=@recent.zipcode%><br>
+  <%end%>
+  <%if @second_recent%>
+    <%=@second_recent.zipcode%><br>
+  <%end%>
+  <%if @third_recent%>
+    <%=@third_recent.zipcode%><br>
+  <%end%>

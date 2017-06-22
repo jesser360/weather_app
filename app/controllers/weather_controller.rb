@@ -4,6 +4,9 @@ class WeatherController < ApplicationController
 
   def index
     @weather = Weather.new
+    @recent = Weather.last
+    @second_recent = Weather.find_by_id(@recent.id-1)
+    @third_recent = Weather.find_by_id(@recent.id-2)
   end
 
   def create
