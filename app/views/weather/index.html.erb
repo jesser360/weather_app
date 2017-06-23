@@ -8,8 +8,8 @@
 <br><br>
 <%= form_for Weather.new, :url => create_weather_path_url(@weather)  do |f|%>
 <%= f.label :zipcode, 'Zipcode' %><br>
-<%= f.text_area :zipcode, class: "form-control", placeholder: 'Search here' %>
-<%= f.submit "Search", class: 'btn btn-primary btn-md center-block' %>
+<%= f.text_field :zipcode, class: "form-control zipcode", placeholder: 'Search here'%>
+<%= f.submit "Search", class: 'btn btn-primary btn-md center-block search' %>
 <%end%>
 <br><br>
 <h3>Recent Searches:</h3>
