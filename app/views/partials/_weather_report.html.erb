@@ -1,68 +1,18 @@
-<div class="row text-center weather">
-  <div class="col-xs-2">
-    <%= @day0_date%><br/>
-    <%=image_tag('http://openweathermap.org/img/w/'+@day0_icon+'.png')%><br/>
-    <%= @day0_des%>
-    <p>Day:
-      <%= @day0_temp%>
-      F</p>
-    <p>Night:
-      <%= @night0_temp%>
-      F</p>
-  </div>
-  <div class="col-xs-2">
-    <%= @day1_date%><br/>
-    <%=image_tag('http://openweathermap.org/img/w/'+@day1_icon+'.png')%><br/>
-    <%= @day1_des%>
-    <p>Day:
-      <%= @day1_temp%>
-      F</p>
-    <p>Night:
-      <%= @night1_temp%>
-      F</p>
-  </div>
-  <div class="col-xs-2">
-    <%= @day2_date%><br/>
-    <%=image_tag('http://openweathermap.org/img/w/'+@day2_icon+'.png')%><br/>
-    <%= @day2_des%>
-    <p>Day:
-      <%= @day2_temp%>
-      F</p>
-    <p>Night:
-      <%= @night2_temp%>
-      F</p>
-  </div>
-  <div class="col-xs-2">
-    <%= @day3_date%><br/>
-    <%=image_tag('http://openweathermap.org/img/w/'+@day3_icon+'.png')%><br/>
-    <%= @day3_des%>
-    <p>Day:
-      <%= @day3_temp%>
-      F</p>
-    <p>Night:
-      <%= @night3_temp%>
-      F</p>
-  </div>
-  <div class="col-xs-2">
-    <%= @day4_date%><br/>
-    <%=image_tag('http://openweathermap.org/img/w/'+@day4_icon+'.png')%><br/>
-    <%= @day4_des%>
-    <p>Day:
-      <%= @day4_temp%>
-      F</p>
-    <p>Night:
-      <%= @night4_temp%>
-      F</p>
-  </div>
-  <div class="col-xs-2">
-    <%= @day5_date%><br/>
-    <%=image_tag('http://openweathermap.org/img/w/'+@day5_icon+'.png')%><br/>
-    <%= @day5_des%>
-    <p>Day:
-      <%= @day5_temp%>
-      F</p>
-    <p>Night:
-      <%= @night5_temp%>
-      F</p>
-  </div>
-</div>
+<%$i = 0%>
+<%$total = 5%>
+<%while $i <= $total do%>
+<%@day = @total_days[$i]%>
+<div class="col-xs-2">
+   <%= @day[:format_date]%><br/>
+   <%=image_tag('http://openweathermap.org/img/w/'+@day[:icon]+'.png')%><br/>
+   <%= @day[:description]%>
+   <p>Day:
+     <%= @day[:day_temp]%>
+     F</p>
+   <p>Night:
+     <%= @day[:night_temp]%>
+     F</p>
+ </div>
+
+<%$i+=1%>
+<%end%>
