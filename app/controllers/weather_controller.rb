@@ -41,7 +41,7 @@ class WeatherController < ApplicationController
   end
 
   def fetch_weather zipcode
-      Rails.cache.write("#{zipcode}", expires_in: 30.minutes) do
+      Rails.cache.write("#{zipcode}", expires_in: 10.seconds) do
       @response = HTTParty.get("http://api.openweathermap.org/data/2.5/forecast/daily?zip=#{zipcode}&cnt=6&APPID=56816b6400cf26a5068b34d20251372f")
     end
     @response = HTTParty.get("http://api.openweathermap.org/data/2.5/forecast/daily?zip=#{zipcode}&cnt=6&APPID=56816b6400cf26a5068b34d20251372f")
