@@ -26,6 +26,13 @@ class WeatherController < ApplicationController
   def show
     @current = Weather.find_by_id(params[:id])
     @zipcode = @current.zipcode
+      if Rails.cache.fetch("#{@zipcode}")
+        p Rails.cache.read("#{@zipcode}")
+        p "YAY"
+        flash[:success] = "This data was retrieved from cached history"
+      else
+        p "BOO"
+      end
       weather_hash = fetch_weather(@zipcode)
       assign_values(weather_hash)
   end
@@ -34,10 +41,9 @@ class WeatherController < ApplicationController
   end
 
   def fetch_weather zipcode
-      if Rails.cache.exist?("#{zipcode}")
-        puts "CACHED DATA"
-      end
-      Rails.cache.write("#{zipcode}", zipcode,  expires_in: 30.minutes)
+      Rails.cache.write("#{zipcode}", expires_in: 30.minutes) do
+      @response = HTTParty.get("http://api.openweathermap.org/data/2.5/forecast/daily?zip=#{zipcode}&cnt=6&APPID=56816b6400cf26a5068b34d20251372f")
+    end
     @response = HTTParty.get("http://api.openweathermap.org/data/2.5/forecast/daily?zip=#{zipcode}&cnt=6&APPID=56816b6400cf26a5068b34d20251372f")
   end
 

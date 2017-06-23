@@ -17,7 +17,11 @@
 <h3><%=link_to 'Back to Search', '/'%></h3>
 <h4>Searched zipcode: <%= @current.zipcode%></h4>
 <h1 class="text-center"><%= @city_name%></h1>
-
+<br /><% flash.each do |name, msg| %>
+<div class="myAlert<% if name==" error" %> alert-danger <% elsif name==" success" %> alert-success <% else %> alert-info <% end %>">
+<%= msg %>
+</div>
+<% end %>
 <%= render 'partials/weather_report', collection: @city,cached: true%>
 </body>
 </html>
