@@ -34,33 +34,38 @@ class WeatherController < ApplicationController
   end
 
   def fetch_weather zipcode
+      if Rails.cache.exist?("#{zipcode}")
+        puts "CACHED DATA"
+      end
+      Rails.cache.write("#{zipcode}", zipcode,  expires_in: 30.minutes)
     @response = HTTParty.get("http://api.openweathermap.org/data/2.5/forecast/daily?zip=#{zipcode}&cnt=6&APPID=56816b6400cf26a5068b34d20251372f")
   end
 
 
   def assign_values(weather_hash)
     require 'date'
-    @cached = Rails.cache.fetch("#{@zipcode}", expires_in: 30.minutes) do
-      @city = weather_hash.parsed_response
-    end
       if (weather_hash.parsed_response['city'])
+           @city = weather_hash.parsed_response
            @city_name = @city['city']['name']
            @total_days = []
            $i = 0
            $total = 5
-           while $i <= $total do
-            @day = {}
-            @day[:date] = @city['list'][$i]['dt']
-           @day[:format_date] = Time.at(@day[:date]).to_date.strftime("%m/%d")
-           @day[:day] = @city['list'][$i]['temp']['day']
-           @day[:day_temp] = ((1.8*(@day[:day]-273))+32).floor
-           @day[:night] = @city['list'][$i]['temp']['night']
-           @day[:night_temp] = ((1.8*(@day[:night]-273))+32).floor
-           @day[:icon] = @city['list'][$i]['weather'][0]['icon']
-           @day[:description] = @city['list'][$i]['weather'][0]['description']
-           @total_days.push(@day)
-           $i+=1
-         end
+             while $i <= $total do
+               @day = {}
+               @day[:date] = @city['list'][$i]['dt']
+               @day[:format_date] = Time.at(@day[:date]).to_date.strftime("%m/%d")
+               @day[:day] = @city['list'][$i]['temp']['day']
+               @day[:day_temp] = ((1.8*(@day[:day]-273))+32).floor
+               @day[:night] = @city['list'][$i]['temp']['night']
+               @day[:night_temp] = ((1.8*(@day[:night]-273))+32).floor
+               @day[:icon] = @city['list'][$i]['weather'][0]['icon']
+               @day[:description] = @city['list'][$i]['weather'][0]['description']
+               @total_days.push(@day)
+               $i+=1
+             end
+             Rails.cache.write("#{@city_name}", expires_in: 30.minutes) do
+               @total_days
+             end
       else
         redirect_to :back
         flash[:error] = "Not a valid USA zip code"

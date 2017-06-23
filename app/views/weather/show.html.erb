@@ -16,7 +16,6 @@
   </head>
 <h3><%=link_to 'Back to Search', '/'%></h3>
 <h4>Searched zipcode: <%= @current.zipcode%></h4>
-<h4>cached: <%@cached%></h4>
 <h1 class="text-center"><%= @city_name%></h1>
 
 <%= render 'partials/weather_report', collection: @city,cached: true%>
